@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap');
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Google Icons (Material) */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+    /* src: local('Material Icons'), local('MaterialIcons-Regular'),
+        url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+        url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+        url(https://example.com/MaterialIcons-Regular.ttf) format('truetype'); */
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* ----- End of Material Icons ------------- */
+
+:root {
+    --yellow: rgb(249, 168, 38);
+    --red: #ea8282;
+    --green: #60bf88;
+    --debug-border: 1px solid hotpink;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    max-width: 100vw;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url('./assets/background.png');
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-size: 2048px;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+.heading {
+    color: #d1d0d0;
+    margin-block: 1em 2em;
+}
+
+.container {
+    max-width: 100%;
+    border-radius: 1rem;
+    background-color: white;
+    height: max-content;
+    padding-block: 2em 1em;
+    max-width: 500px;
+    margin-bottom: 2em;
+    margin-inline: 1em;
+}
+
+.content {
+    /* padding-block: 2em; */
+    width: 80%;
+    margin: auto;
+    /* border: var(--debug-border); */
+}
+
+@media (min-width: 520px) {
+    .container {
+        margin: auto;
+    }
+}
+
+.que {
+    font-weight: 700;
+    text-align: left;
+    margin: 10px;
+}
+
+.options {
+    margin-top: 1em;
+}
+
+.option {
+    margin: auto;
+    cursor: pointer;
+    text-align: left;
+    margin-block: 0.5em;
+    font-weight: 500;
+    padding-block: 1em;
+    border: 0.1rem solid rgba(96, 102, 208, 0.7);
+    border-radius: 15px;
+    transition: all 0.25s linear;
+}
+
+.option-text {
+    margin-inline: 2em;
+}
+
+.option-active {
+    background-color: var(--yellow);
+    color: white;
+    border: 0.1rem solid var(--yellow);
+}
+
+.option:hover,
+.option:active {
+    background-color: var(--yellow);
+    color: white;
+    border: 0.1rem solid var(--yellow);
+}
+
+.cta {
+    display: block;
+    width: fit-content;
+    margin-top: 0.5em;
+    margin-left: auto;
+}
+
+.sub-btn {
+    padding: 0.5em 1em;
+    border: 0.1rem solid rgba(96, 102, 208, 0.7);
+    background-color: white;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.25s linear;
+}
+
+.sub-btn:hover {
+    background-color: var(--yellow);
+    color: white;
+    border: 0.1rem solid var(--yellow);
+}
+
+.sub-btn:active {
+    transform: scale(0.95);
+}
+
+/* conditional rendering */
+.cta-dis-none {
+    display: none;
+}
+
+/* -----------------   Loader component ---------------------*/
+.loader {
+    position: relative;
+    margin: 0 auto;
+    width: 100px;
+}
+.loader:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.circular {
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    height: 100%;
+    transform-origin: center center;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    -webkit-animation: dash 1.5s ease-in-out infinite,
+        color 6s ease-in-out infinite;
+    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+    stroke-linecap: round;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+    }
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+    }
+}
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+    }
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+    }
+}
+@-webkit-keyframes color {
+    100%,
+    0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%,
+    90% {
+        stroke: #ffa700;
+    }
+}
+@keyframes color {
+    100%,
+    0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%,
+    90% {
+        stroke: #ffa700;
+    }
+}
+body {
+    background-color: #eee;
+}
+
+.showbox {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5%;
+}
+
+/* End of Loader Component */
+
+/* Correct Option styles */
+
+.correct-option {
+    background-color: var(--green);
+    border: 1px solid var(--green);
+}
+
+.correct-option > .content,
+.incorrect-option > .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-inline: 2em;
+}
+
+.incorrect-option {
+    background-color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.correct-option:hover {
+    background-color: var(--green);
+    border: 1px solid var(--green);
+}
+.incorrect-option:hover {
+    background-color: var(--red);
+    border: 1px solid var(--red);
+}
