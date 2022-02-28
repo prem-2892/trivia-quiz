@@ -5,6 +5,9 @@ import {
     SET_ANSWER_REQUEST,
     SET_ANSWER_SUCCESS,
     SET_ANSWER_FAIL,
+    SET_CATEGORY_REQUEST,
+    SET_CATEGORY_SUCCESS,
+    SET_CATEGORY_FAIL,
 } from '../constants/questionConstants'
 
 export const questionCreateReducer = (state = {}, action) => {
@@ -16,6 +19,22 @@ export const questionCreateReducer = (state = {}, action) => {
             return { loading: false, success: true, question: action.payload }
 
         case QUESTION_CREATE_FAIL:
+            return { loading: false, error: action.payload }
+
+        default:
+            return state
+    }
+}
+
+export const setCategoryReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SET_CATEGORY_REQUEST:
+            return { loading: true }
+
+        case SET_CATEGORY_SUCCESS:
+            return { loading: false, category: action.payload }
+
+        case SET_CATEGORY_FAIL:
             return { loading: false, error: action.payload }
 
         default:

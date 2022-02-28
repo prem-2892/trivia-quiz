@@ -6,18 +6,27 @@ import {
     SET_ANSWER_REQUEST,
     SET_ANSWER_SUCCESS,
     SET_ANSWER_FAIL,
+    SET_CATEGORY_REQUEST,
+    SET_CATEGORY_SUCCESS,
+    SET_CATEGORY_FAIL,
 } from '../constants/questionConstants'
 
-export const createQuestion = () => async (dispatch) => {
+export const createQuestion = () => async (dispatch, getState) => {
     try {
         dispatch({
             type: QUESTION_CREATE_REQUEST,
         })
 
+        const {
+            setCategory: { category },
+        } = getState()
+
+        console.log(category)
+
         const { data } = await axios.get('https://opentdb.com/api.php', {
             params: {
                 amount: 1,
-                category: 18,
+                category: category,
                 type: 'multiple',
             },
         })
@@ -34,6 +43,31 @@ export const createQuestion = () => async (dispatch) => {
 
         dispatch({
             type: QUESTION_CREATE_FAIL,
+            payload: message,
+        })
+    }
+}
+
+export const setCategory = (cat) => async (dispatch) => {
+    try {
+        dispatch({
+            type: SET_CATEGORY_REQUEST,
+        })
+
+        if (cat !== 0) {
+            dispatch({
+                type: SET_CATEGORY_SUCCESS,
+                payload: cat,
+            })
+        }
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+
+        dispatch({
+            type: SET_CATEGORY_FAIL,
             payload: message,
         })
     }

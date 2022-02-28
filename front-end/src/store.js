@@ -4,10 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     questionCreateReducer,
     setAnswerReducer,
+    setCategoryReducer,
 } from './reducers/questionReducers'
 
 const reducer = combineReducers({
     questionCreate: questionCreateReducer,
+    setCategory: setCategoryReducer,
     getAnswer: setAnswerReducer,
 })
 

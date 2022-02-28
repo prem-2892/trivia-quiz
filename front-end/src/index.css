@@ -117,6 +117,8 @@ select {
     --yellow: rgb(249, 168, 38);
     --red: #ea8282;
     --green: #60bf88;
+    --magenta: #8d67ab;
+    --pink: #e8115b;
     --debug-border: 1px solid hotpink;
 }
 
@@ -204,9 +206,9 @@ code {
 
 .option:hover,
 .option:active {
-    background-color: var(--yellow);
+    background-color: var(--magenta);
     color: white;
-    border: 0.1rem solid var(--yellow);
+    border: 0.1rem solid var(--magenta);
 }
 
 .cta {
@@ -227,9 +229,9 @@ code {
 }
 
 .sub-btn:hover {
-    background-color: var(--yellow);
+    background-color: var(--magenta);
     color: white;
-    border: 0.1rem solid var(--yellow);
+    border: 0.1rem solid var(--magenta);
 }
 
 .sub-btn:active {
@@ -367,6 +369,7 @@ body {
 .correct-option {
     background-color: var(--green);
     border: 1px solid var(--green);
+    font-weight: 600;
 }
 
 .correct-option > .content,
@@ -381,6 +384,7 @@ body {
 .incorrect-option {
     background-color: var(--red);
     border: 1px solid var(--red);
+    font-weight: 600;
 }
 
 .correct-option:hover {
@@ -390,4 +394,30 @@ body {
 .incorrect-option:hover {
     background-color: var(--red);
     border: 1px solid var(--red);
+}
+
+.first-step-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-next-step {
+    font-size: 1rem;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 0.6em;
+    border: none;
+    cursor: pointer;
+    margin: 0.5em;
+}
+
+.btn-next-step:hover {
+    transform: translateY(-2px);
+}
+
+.set-category-form {
+    display: flex;
+    flex-direction: column;
 }

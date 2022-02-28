@@ -6,9 +6,14 @@ import Loader from './component/Loader'
 import { nanoid } from 'nanoid'
 
 // Actions
-import { createQuestion, setAnswer } from './action/questionActions.js'
+import {
+    createQuestion,
+    setAnswer,
+    setCategory,
+} from './action/questionActions.js'
 import CorrectOption from './component/CorrectOption'
 import IncorrectOption from './component/IncorrectOption'
+import CustomSelectList from './component/CustomSelectList'
 
 function App() {
     const [que, setQue] = useState('')
@@ -18,6 +23,8 @@ function App() {
     const [hasSelected, setHasSelected] = useState(false)
     const [clickable, setClickable] = useState(true)
     const [score, setScore] = useState(0)
+    const [step, setStep] = useState(0)
+    const [cat, setCat] = useState()
 
     const dispatch = useDispatch()
 
@@ -45,10 +52,6 @@ function App() {
 
         setOpts(array)
     }
-
-    useEffect(() => {
-        dispatch(createQuestion())
-    }, [dispatch])
 
     useEffect(() => {
         if (question !== undefined) {
@@ -87,62 +90,96 @@ function App() {
         dispatch(createQuestion())
     }
 
+    // Setting category
+
+    const nextClickListener = (event) => {
+        event.preventDefault()
+
+        dispatch(setCategory(cat))
+        dispatch(createQuestion())
+        setStep(1)
+    }
     if (loading) {
         return <Loader />
     } else {
         return (
             <div className='App'>
                 <h1 className='heading'>Gain a little Something!</h1>
-                <h3>{`Final Score: ${score}`}</h3>
+
                 <div className='container'>
                     <div className='content'>
-                        <div className='que'>{decode(que)}</div>
-                        <div className='options'>
-                            {opts.map((option) =>
-                                hasSelected === false ? (
-                                    <div
-                                        className='option'
-                                        key={nanoid()}
-                                        onClick={(e) => {
-                                            clickHandle(option)
-                                        }}
+                        {step === 0 ? (
+                            <>
+                                <div className='first-step-div'>
+                                    <form
+                                        action='#'
+                                        className='set-category-form'
+                                        onSubmit={(e) => nextClickListener(e)}
                                     >
-                                        <div className='option-text'>
-                                            {option}
-                                        </div>
-                                    </div>
-                                ) : selectedAnswer === option ? (
-                                    selectedAnswer === correctAnswer ? (
-                                        <CorrectOption
-                                            data={selectedAnswer}
-                                            key={nanoid()}
+                                        <CustomSelectList
+                                            setCat={setCat}
+                                            className='list'
                                         />
-                                    ) : (
-                                        <IncorrectOption
-                                            data={selectedAnswer}
-                                            key={nanoid()}
-                                        />
-                                    )
-                                ) : option === correctAnswer ? (
-                                    <CorrectOption
-                                        data={option}
-                                        key={nanoid()}
-                                    />
-                                ) : (
-                                    <div
-                                        className='option'
-                                        key={nanoid()}
-                                        onClick={(e) => {
-                                            clickHandle(option)
-                                        }}
-                                    >
-                                        <div className='option-text'>
-                                            {option}
-                                        </div>
-                                    </div>
-                                )
-                            )}
-                        </div>
+                                        <button
+                                            className='btn-next-step'
+                                            type='submit'
+                                        >
+                                            NEXT
+                                        </button>
+                                    </form>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className='que'>{decode(que)}</div>
+                                <div className='options'>
+                                    {opts.map((option) =>
+                                        hasSelected === false ? (
+                                            <div
+                                                className='option'
+                                                key={nanoid()}
+                                                onClick={(e) => {
+                                                    clickHandle(option)
+                                                }}
+                                            >
+                                                <div className='option-text'>
+                                                    {option}
+                                                </div>
+                                            </div>
+                                        ) : selectedAnswer === option ? (
+                                            selectedAnswer === correctAnswer ? (
+                                                <CorrectOption
+                                                    data={selectedAnswer}
+                                                    key={nanoid()}
+                                                />
+                                            ) : (
+                                                <IncorrectOption
+                                                    data={selectedAnswer}
+                                                    key={nanoid()}
+                                                />
+                                            )
+                                        ) : option === correctAnswer ? (
+                                            <CorrectOption
+                                                data={option}
+                                                key={nanoid()}
+                                            />
+                                        ) : (
+                                            <div
+                                                className='option'
+                                                key={nanoid()}
+                                                onClick={(e) => {
+                                                    clickHandle(option)
+                                                }}
+                                            >
+                                                <div className='option-text'>
+                                                    {option}
+                                                </div>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                            </>
+                        )}
                         <div
                             className={`cta ${
                                 hasSelected === false ? 'cta-dis-none' : ''
